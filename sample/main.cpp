@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "lexical.h"
+#include "syntactic.h"
 
 int parseArgs(int argc, char *argv[], std::string &path) {
     if (argc == 1) {
@@ -49,6 +50,9 @@ int main(int argc, char *argv[]) {
 
     Lexical lexical;
     auto tokens = lexical.compile(inputContent);
+
+    Syntactic syntactic;
+    auto tree = syntactic.compile(tokens);
 
     return 0;
 }

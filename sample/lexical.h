@@ -7,13 +7,13 @@ class Lexical : public LexicalAnalysis {
 public:
     Lexical();
 
-private:
     enum TokenType : int {
         Parenthesis = 0,
         Name,
         Number
     };
 
+private:
     void tokenizer(const std::string &target, std::vector<Token> &tokens) override;
 };
 
