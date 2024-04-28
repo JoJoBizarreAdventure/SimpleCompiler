@@ -12,12 +12,13 @@ LexicalAnalysis::LexicalAnalysis(std::string target, std::function<std::string(i
         target(std::move(target)),
         int2EnumStr(std::move(func)) {}
 
-void LexicalAnalysis::compile() {
+std::vector<LexicalAnalysis::Token> LexicalAnalysis::compile() {
     std::vector<Token> tokens;
     tokenizer(target, tokens);
 #ifdef DEBUG_LOG
     printTokens(tokens);
 #endif
+    return tokens;
 }
 
 void LexicalAnalysis::printTokens(const std::vector<Token> &tokens) {
