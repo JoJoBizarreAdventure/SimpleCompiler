@@ -32,7 +32,7 @@ int loadFile(const std::string &path, std::string &content) {
     ss << inFileStream.rdbuf();
     inFileStream.close();
     content = ss.str();
-    std::cout << "Load File: content as below\n" << content << std::endl;
+    std::cout << "Load File: content as below\n" << content << std::endl << std::endl;
 
     return 0;
 }

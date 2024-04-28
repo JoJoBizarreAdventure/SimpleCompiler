@@ -5,6 +5,7 @@ std::shared_ptr<SyntacticAnalysis::ASTNodeTrunk> SyntacticAnalysis::compile(cons
 #ifdef DEBUG_LOG
     std::cout<<"AST Tree:"<<std::endl;
     printTree(root);
+    std::cout<<std::endl;
 #endif
     return root;
 }
