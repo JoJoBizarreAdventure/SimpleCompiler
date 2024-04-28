@@ -22,7 +22,8 @@ void Syntactic::walk(const std::vector<Token> &tokens, const std::shared_ptr<AST
     } else if (token.type == Lexical::TokenType::Parenthesis && token.value == "(") {
         tokenPtr++;
         if (tokens[tokenPtr].type != Lexical::TokenType::Name) {
-            std::cerr << "Syntactic Analysis: expected a name after ( - type:" << tokens[tokenPtr].type
+            std::cerr << "Syntactic Analysis: expected a name after ( - type:"
+                      << Lexical::tokenTypeStr(tokens[tokenPtr].type)
                       << "\tvalue: " << tokens[tokenPtr].value << std::endl;
             std::abort();
         }
@@ -34,8 +35,18 @@ void Syntactic::walk(const std::vector<Token> &tokens, const std::shared_ptr<AST
         tokenPtr++;
         node->children.push_back(expression);
     } else {
-        std::cerr << "Syntactic Analysis: unexpected token - type:" << token.type << "\tvalue: " << token.value
-                  << std::endl;
+        std::cerr << "Syntactic Analysis: unexpected token - type:" << Lexical::tokenTypeStr(token.type)
+                  << "\tvalue: " << token.value << std::endl;
         std::abort();
     }
+}
+
+const std::string Enum2Str[]{
+        "Program       ",
+        "NumberLiteral ",
+        "CallExpression"
+};
+
+std::string Syntactic::int2SyntacticType(int i) {
+    return Enum2Str[i];
 }

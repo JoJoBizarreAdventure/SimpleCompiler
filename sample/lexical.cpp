@@ -2,15 +2,6 @@
 
 #include <iostream>
 
-const std::string Enum2Str[]{
-        "Parenthesis",
-        "Name       ",
-        "Number     "
-};
-
-Lexical::Lexical() : LexicalAnalysis([](int i) {
-    return Enum2Str[i];
-}) {}
 
 void Lexical::tokenizer(const std::string &target, std::vector<Token> &tokens) {
     for (int i = 0; i < target.size();) {
@@ -41,5 +32,20 @@ void Lexical::tokenizer(const std::string &target, std::vector<Token> &tokens) {
             std::abort();
         }
     }
+}
+
+const std::string Enum2Str[]{
+        "Parenthesis",
+        "Name       ",
+        "Number     "
+};
+
+std::string Lexical::tokenTypeStr(int i) {
+    return Enum2Str[i];
+}
+
+
+std::string Lexical::int2TokenType(int i) {
+    return tokenTypeStr(i);
 }
 

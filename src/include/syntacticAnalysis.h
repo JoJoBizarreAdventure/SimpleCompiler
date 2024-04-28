@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <utility>
+#include <functional>
 
 #include "lexicalAnalysis.h"
 
@@ -20,7 +21,7 @@ public:
 
         explicit ASTNode(int t, std::string v) : type(t), value(std::move(v)) {}
 
-        virtual void print() = 0;
+        virtual void print(const std::function<std::string(int)> &queryStr) = 0;
     };
 
     struct ASTNodeTrunk : public ASTNode {
@@ -28,14 +29,13 @@ public:
 
         explicit ASTNodeTrunk(int t, std::string v) : ASTNode(t, std::move(v)) {}
 
-        void print() override;
+        void print(const std::function<std::string(int)> &queryStr) override;
     };
 
     struct ASTNodeLeaf : public ASTNode {
-
         explicit ASTNodeLeaf(int t, std::string v) : ASTNode(t, std::move(v)) {};
 
-        void print() override;
+        void print(const std::function<std::string(int)> &queryStr) override;
     };
 
 protected:
@@ -47,7 +47,9 @@ public:
     std::shared_ptr<ASTNodeTrunk> compile(const std::vector<Token> &tokens);
 
 private:
-    static void printTree(const std::shared_ptr<ASTNode> &node);
+    virtual std::string int2SyntacticType(int i);
+
+    void printTree(const std::shared_ptr<ASTNode> &node);
 };
 
 #endif //SIMPLECOMPILER_SYNTACTICANALYSIS_H

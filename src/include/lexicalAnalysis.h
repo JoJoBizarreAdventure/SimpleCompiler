@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <functional>
 
 /*
  *  Breaks the input code (string) into the basic syntax
@@ -15,16 +14,12 @@
 
 class LexicalAnalysis {
 public:
-    LexicalAnalysis();
-
-    explicit LexicalAnalysis(std::function<std::string(int)> func);
-
     struct Token {
         int type;
         std::string value;
     };
 private:
-    std::function<std::string(int)> int2EnumStr;
+    virtual std::string int2TokenType(int i);
 
     void printTokens(const std::vector<Token> &tokens);
 

@@ -5,8 +5,6 @@
 
 class Lexical : public LexicalAnalysis {
 public:
-    Lexical();
-
     enum TokenType : int {
         Parenthesis = 0,
         Name,
@@ -15,6 +13,12 @@ public:
 
 private:
     void tokenizer(const std::string &target, std::vector<Token> &tokens) override;
+
+public:
+    static std::string tokenTypeStr(int i);
+
+private:
+    std::string int2TokenType(int i) override;
 };
 
 
