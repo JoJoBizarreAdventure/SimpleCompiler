@@ -2,13 +2,13 @@
 
 #include <iostream>
 
-const std::string Enum2Str [] {
+const std::string Enum2Str[]{
         "Parenthesis",
         "Name       ",
         "Number     "
 };
 
-Lexical::Lexical(const std::string &target) : LexicalAnalysis(target, [](int i) {
+Lexical::Lexical() : LexicalAnalysis([](int i) {
     return Enum2Str[i];
 }) {}
 

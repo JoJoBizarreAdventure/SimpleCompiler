@@ -47,8 +47,8 @@ int main(int argc, char *argv[]) {
         return -2;
     }
 
-    Lexical lexical(inputContent);
-    auto tokens = lexical.compile();
+    Lexical lexical;
+    auto tokens = lexical.compile(inputContent);
 
     return 0;
 }

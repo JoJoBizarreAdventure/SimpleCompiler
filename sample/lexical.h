@@ -5,7 +5,7 @@
 
 class Lexical : public LexicalAnalysis {
 public:
-    explicit Lexical(const std::string &target);
+    Lexical();
 
 private:
     enum TokenType : int {

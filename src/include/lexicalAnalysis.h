@@ -14,12 +14,10 @@
  * */
 
 class LexicalAnalysis {
-private:
-    std::string target;
 public:
-    explicit LexicalAnalysis(std::string target);
+    LexicalAnalysis();
 
-    explicit LexicalAnalysis(std::string target, std::function<std::string(int)> func);
+    explicit LexicalAnalysis(std::function<std::string(int)> func);
 
     struct Token {
         int type;
@@ -31,7 +29,7 @@ private:
     void printTokens(const std::vector<Token> &tokens);
 
 public:
-    std::vector<Token> compile();
+    std::vector<Token> compile(const std::string &target);
 
 private:
     virtual void tokenizer(const std::string &target, std::vector<Token> &tokens) = 0;

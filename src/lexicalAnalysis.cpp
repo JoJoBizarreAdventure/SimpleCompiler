@@ -2,17 +2,15 @@
 
 #include <utility>
 
-LexicalAnalysis::LexicalAnalysis(std::string target) :
-        target(std::move(target)),
+LexicalAnalysis::LexicalAnalysis() :
         int2EnumStr([](int i) -> std::string {
             return std::to_string(i);
         }) {}
 
-LexicalAnalysis::LexicalAnalysis(std::string target, std::function<std::string(int)> func) :
-        target(std::move(target)),
+LexicalAnalysis::LexicalAnalysis(std::function<std::string(int)> func) :
         int2EnumStr(std::move(func)) {}
 
-std::vector<LexicalAnalysis::Token> LexicalAnalysis::compile() {
+std::vector<LexicalAnalysis::Token> LexicalAnalysis::compile(const std::string &target) {
     std::vector<Token> tokens;
     tokenizer(target, tokens);
 #ifdef DEBUG_LOG
