@@ -16,9 +16,7 @@
 
 class LexicalAnalysis {
 private:
-    virtual std::string int2TokenType(int i);
-
-    void printTokens(const std::vector<Token> &tokens);
+    static void printTokens(const std::vector<Token> &tokens);
 
 public:
     std::vector<Token> compile(const std::string &target);

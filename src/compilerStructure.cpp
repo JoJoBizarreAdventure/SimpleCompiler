@@ -2,6 +2,24 @@
 
 #include <iostream>
 
+#pragma region Lexical Token
+
+std::function<std::string(int)> LexicalStruct::Token::type2string = nullptr;
+
+void printToken(const Token &token) {
+    std::cout << "type: ";
+    if (Token::type2string) {
+        std::cout << Token::type2string(token.type);
+    } else {
+        std::cout << token.type;
+    }
+    std::cout << "\tvalue:" << token.value;
+}
+
+#pragma endregion
+
+#pragma region Syntactic Node
+
 static int tabNum = 0;
 
 void printTab() {
@@ -30,3 +48,5 @@ void ASTNodeLeaf::print(const std::function<std::string(int)> &queryStr) {
     printTab();
     std::cout << "type: " << queryStr(type) << "    value: " << value << std::endl;
 }
+
+#pragma endregion

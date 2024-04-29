@@ -11,14 +11,15 @@ public:
         Number
     };
 
+    Lexical();
+
+    ~Lexical();
+
 private:
     void tokenizer(const std::string &target, std::vector<Token> &tokens) override;
 
 public:
     static std::string tokenTypeStr(int i);
-
-private:
-    std::string int2TokenType(int i) override;
 };
 
 
