@@ -1,6 +1,6 @@
 #include "lexicalAnalysis.h"
 
-std::vector<LexicalAnalysis::Token> LexicalAnalysis::compile(const std::string &target) {
+std::vector<Token> LexicalAnalysis::compile(const std::string &target) {
     std::vector<Token> tokens;
     tokenizer(target, tokens);
 #ifdef DEBUG_LOG

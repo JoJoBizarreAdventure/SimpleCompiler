@@ -1,7 +1,7 @@
 #include "syntactic.h"
 #include "lexical.h"
 
-std::shared_ptr<SyntacticAnalysis::ASTNodeTrunk> Syntactic::parser(const std::vector<Token> &tokens) {
+std::shared_ptr<ASTNodeTrunk> Syntactic::parser(const std::vector<Token> &tokens) {
     auto root = std::make_shared<ASTNodeTrunk>(Program, "");
     tokenPtr = 0;
     walk(tokens, root);

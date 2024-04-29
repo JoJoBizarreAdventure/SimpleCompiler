@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 
+#include "compileStructure.h"
+
 /*
  *  Breaks the input code (string) into the basic syntax
  *      of the language (array of objects)
@@ -13,11 +15,6 @@
  * */
 
 class LexicalAnalysis {
-public:
-    struct Token {
-        int type;
-        std::string value;
-    };
 private:
     virtual std::string int2TokenType(int i);
 
