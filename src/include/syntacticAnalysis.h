@@ -22,9 +22,7 @@ public:
     std::shared_ptr<ASTNodeTrunk> compile(const std::vector<Token> &tokens);
 
 private:
-    virtual std::string int2SyntacticType(int i);
-
-    void printTree(const std::shared_ptr<ASTNodeTrunk> &node);
+    static void printTree(const std::shared_ptr<ASTNodeTrunk> &node);
 };
 
 #endif //SIMPLECOMPILER_SYNTACTICANALYSIS_H

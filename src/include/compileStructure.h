@@ -23,7 +23,9 @@ namespace SyntacticStruct {
 
         explicit ASTNode(int t, std::string v, bool l) : type(t), value(std::move(v)), isLeaf(l) {}
 
-        virtual void print(const std::function<std::string(int)> &queryStr) = 0;
+        virtual void print() = 0;
+
+        static std::function<std::string(int)>type2string;
     };
 
     struct ASTNodeTrunk : public ASTNode {
@@ -31,14 +33,14 @@ namespace SyntacticStruct {
 
         explicit ASTNodeTrunk(int t, std::string v) : ASTNode(t, std::move(v), false) {}
 
-        void print(const std::function<std::string(int)> &queryStr) override;
+        void print() override;
     };
 
 
     struct ASTNodeLeaf : public ASTNode {
         explicit ASTNodeLeaf(int t, std::string v) : ASTNode(t, std::move(v), true) {};
 
-        void print(const std::function<std::string(int)> &queryStr) override;
+        void print() override;
     };
 }
 typedef SyntacticStruct::ASTNode ASTNode;

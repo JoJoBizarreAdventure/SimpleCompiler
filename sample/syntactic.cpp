@@ -47,6 +47,16 @@ const std::string Enum2Str[]{
         "CallExpression"
 };
 
-std::string Syntactic::int2SyntacticType(int i) {
+std::string int2SyntacticType(int i) {
     return Enum2Str[i];
 }
+
+Syntactic::Syntactic() {
+    ASTNode::type2string = int2SyntacticType;
+}
+
+Syntactic::~Syntactic() {
+    ASTNode::type2string = nullptr;
+}
+
+

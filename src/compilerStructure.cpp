@@ -20,6 +20,8 @@ void printToken(const Token &token) {
 
 #pragma region Syntactic Node
 
+std::function<std::string(int)> SyntacticStruct::ASTNode::type2string = nullptr;
+
 static int tabNum = 0;
 
 void printTab() {
@@ -28,25 +30,34 @@ void printTab() {
     }
 }
 
-void ASTNodeTrunk::print(const std::function<std::string(int)> &queryStr) {
+void ASTNodeTrunk::print() {
     printTab();
     tabNum++;
-    std::cout << "type: " << queryStr(type);
+    std::cout << "type: ";
+    if (type2string)
+        std::cout << type2string(type);
+    else
+        std::cout << type;
     if (!value.empty()) {
         std::cout << "  value: " << value;
     }
     std::cout << "  children: [" << std::endl;
     for (const auto &node: children) {
-        node->print(queryStr);
+        node->print();
     }
     tabNum--;
     printTab();
     std::cout << "]" << std::endl;
 }
 
-void ASTNodeLeaf::print(const std::function<std::string(int)> &queryStr) {
+void ASTNodeLeaf::print() {
     printTab();
-    std::cout << "type: " << queryStr(type) << "    value: " << value << std::endl;
+    std::cout << "type: ";
+    if (type2string)
+        std::cout << type2string(type);
+    else
+        std::cout << type;
+    std::cout << "    value: " << value << std::endl;
 }
 
 #pragma endregion

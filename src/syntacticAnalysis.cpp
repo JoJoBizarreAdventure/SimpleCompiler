@@ -13,9 +13,5 @@ std::shared_ptr<ASTNodeTrunk> SyntacticAnalysis::compile(const std::vector<Token
 }
 
 void SyntacticAnalysis::printTree(const std::shared_ptr<ASTNodeTrunk> &node) {
-    node->print([this](int i) { return int2SyntacticType(i); });
-}
-
-std::string SyntacticAnalysis::int2SyntacticType(int i) {
-    return std::to_string(i);
+    node->print();
 }
