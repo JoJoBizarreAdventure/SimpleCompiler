@@ -9,17 +9,11 @@ const std::string Enum2Str[]{
         "Number     "
 };
 
-std::string Lexical::tokenTypeStr(int i) {
+std::string int2TokenType(int i) {
     return Enum2Str[i];
 }
 
-Lexical::Lexical() {
-    Token::type2string = tokenTypeStr;
-}
-
-Lexical::~Lexical() {
-    Token::type2string = nullptr;
-}
+Lexical::Lexical() : Enum2stringSupport<Token>(int2TokenType) {}
 
 void Lexical::tokenizer(const std::string &target, std::vector<Token> &tokens) {
     for (int i = 0; i < target.size();) {

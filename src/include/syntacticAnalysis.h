@@ -20,9 +20,6 @@ private:
 
 public:
     std::shared_ptr<ASTNodeTrunk> compile(const std::vector<Token> &tokens);
-
-private:
-    static void printTree(const std::shared_ptr<ASTNodeTrunk> &node);
 };
 
 #endif //SIMPLECOMPILER_SYNTACTICANALYSIS_H

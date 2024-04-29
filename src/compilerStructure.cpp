@@ -6,58 +6,68 @@
 
 std::function<std::string(int)> LexicalStruct::Token::type2string = nullptr;
 
-void printToken(const Token &token) {
-    std::cout << "type: ";
+std::ostream &LexicalStruct::operator<<(std::ostream &os, const Token &token) {
+    os << "type: ";
     if (Token::type2string) {
-        std::cout << Token::type2string(token.type);
+        os << Token::type2string(token.type);
     } else {
-        std::cout << token.type;
+        os << token.type;
     }
-    std::cout << "\tvalue:" << token.value;
+    os << "\tvalue:" << token.value;
+    return os;
 }
 
 #pragma endregion
 
 #pragma region Syntactic Node
 
+std::ostream &SyntacticStruct::operator<<(std::ostream &os, const ASTNode *node) {
+    node->outputToStream(os);
+    return os;
+}
+
 std::function<std::string(int)> SyntacticStruct::ASTNode::type2string = nullptr;
 
 static int tabNum = 0;
 
-void printTab() {
+void printTab(std::ostream &os) {
     for (unsigned int i = 0; i < tabNum; i++) {
-        std::cout << '\t';
+        os << '\t';
     }
 }
 
-void ASTNodeTrunk::print() {
-    printTab();
+std::ostream &SyntacticStruct::ASTNodeTrunk::outputToStream(std::ostream &os) const {
+    printTab(os);
     tabNum++;
-    std::cout << "type: ";
-    if (type2string)
-        std::cout << type2string(type);
+    os << "type: ";
+    if (ASTNode::type2string)
+        os << ASTNode::type2string(type);
     else
-        std::cout << type;
+        os << type;
     if (!value.empty()) {
-        std::cout << "  value: " << value;
+        os << "  value: " << value;
     }
-    std::cout << "  children: [" << std::endl;
-    for (const auto &node: children) {
-        node->print();
+    os << "  children: [" << std::endl;
+    for (const auto &child: children) {
+        os << child << std::endl;
     }
     tabNum--;
-    printTab();
-    std::cout << "]" << std::endl;
+    printTab(os);
+    os << "]";
+    return os;
 }
 
-void ASTNodeLeaf::print() {
-    printTab();
-    std::cout << "type: ";
-    if (type2string)
-        std::cout << type2string(type);
+std::ostream &SyntacticStruct::ASTNodeLeaf::outputToStream(std::ostream &os) const {
+    printTab(os);
+    os << "type: ";
+    if (ASTNode::type2string)
+        os << ASTNode::type2string(type);
     else
-        std::cout << type;
-    std::cout << "    value: " << value << std::endl;
+        os << type;
+    std::cout << "    value: " << value;
+    return os;
 }
 
 #pragma endregion
+
+

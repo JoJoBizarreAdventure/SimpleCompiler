@@ -48,11 +48,19 @@ int main(int argc, char *argv[]) {
         return -2;
     }
 
-    Lexical lexical;
-    auto tokens = lexical.compile(inputContent);
+    std::vector<Token> tokens;
+    {
+        Lexical lexical;
+        tokens = lexical.compile(inputContent);
+    }
 
     Syntactic syntactic;
     auto tree = syntactic.compile(tokens);
+    std::shared_ptr<ASTNodeTrunk> tree;
+    {
+        Syntactic syntactic;
+        tree = syntactic.compile(tokens);
+    }
 
     return 0;
 }

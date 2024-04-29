@@ -12,9 +12,7 @@ std::vector<Token> LexicalAnalysis::compile(const std::string &target) {
 void LexicalAnalysis::printTokens(const std::vector<Token> &tokens) {
     std::cout << "tokens:" << std::endl;
     for (const auto &token: tokens) {
-        std::cout << "  ";
-        printToken(token);
-        std::cout << std::endl;
+        std::cout << "  " << token << std::endl;
     }
     std::cout << std::endl << std::endl;
 }

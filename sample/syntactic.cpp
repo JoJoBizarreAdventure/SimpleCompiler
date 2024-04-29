@@ -1,6 +1,18 @@
 #include "syntactic.h"
 #include "lexical.h"
 
+const std::string Enum2Str[]{
+        "Program",
+        "NumberLiteral",
+        "CallExpression"
+};
+
+std::string int2SyntacticType(int i) {
+    return Enum2Str[i];
+}
+
+Syntactic::Syntactic() : Enum2stringSupport<ASTNode>(int2SyntacticType) {}
+
 std::shared_ptr<ASTNodeTrunk> Syntactic::parser(const std::vector<Token> &tokens) {
     auto root = std::make_shared<ASTNodeTrunk>(Program, "");
     tokenPtr = 0;
@@ -23,7 +35,7 @@ void Syntactic::walk(const std::vector<Token> &tokens, const std::shared_ptr<AST
         tokenPtr++;
         if (tokens[tokenPtr].type != Lexical::TokenType::Name) {
             std::cerr << "Syntactic Analysis: expected a name after ( - type:"
-                      << Lexical::tokenTypeStr(tokens[tokenPtr].type)
+                      << Token::type2string(tokens[tokenPtr].type)
                       << "\tvalue: " << tokens[tokenPtr].value << std::endl;
             std::abort();
         }
@@ -35,28 +47,12 @@ void Syntactic::walk(const std::vector<Token> &tokens, const std::shared_ptr<AST
         tokenPtr++;
         node->children.push_back(expression);
     } else {
-        std::cerr << "Syntactic Analysis: unexpected token - type:" << Lexical::tokenTypeStr(token.type)
-                  << "\tvalue: " << token.value << std::endl;
+        std::cerr << "Syntactic Analysis: unexpected token - type:" << token << std::endl;
         std::abort();
     }
 }
 
-const std::string Enum2Str[]{
-        "Program",
-        "NumberLiteral",
-        "CallExpression"
-};
 
-std::string int2SyntacticType(int i) {
-    return Enum2Str[i];
-}
 
-Syntactic::Syntactic() {
-    ASTNode::type2string = int2SyntacticType;
-}
-
-Syntactic::~Syntactic() {
-    ASTNode::type2string = nullptr;
-}
 
 
