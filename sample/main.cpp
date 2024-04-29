@@ -5,6 +5,7 @@
 
 #include "lexical.h"
 #include "syntactic.h"
+#include "transform.h"
 
 int parseArgs(int argc, char *argv[], std::string &path) {
     if (argc == 1) {
@@ -54,12 +55,16 @@ int main(int argc, char *argv[]) {
         tokens = lexical.compile(inputContent);
     }
 
-    Syntactic syntactic;
-    auto tree = syntactic.compile(tokens);
     std::shared_ptr<ASTNodeTrunk> tree;
     {
         Syntactic syntactic;
         tree = syntactic.compile(tokens);
+    }
+
+    std::shared_ptr<ASTNodeTrunk> newTree;
+    {
+        Transform transform;
+        newTree = transform.compile(tree);
     }
 
     return 0;
