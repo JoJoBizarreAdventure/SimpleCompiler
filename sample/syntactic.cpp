@@ -42,8 +42,8 @@ void Syntactic::walk(const std::vector<Token> &tokens, const std::shared_ptr<AST
 }
 
 const std::string Enum2Str[]{
-        "Program       ",
-        "NumberLiteral ",
+        "Program",
+        "NumberLiteral",
         "CallExpression"
 };
 

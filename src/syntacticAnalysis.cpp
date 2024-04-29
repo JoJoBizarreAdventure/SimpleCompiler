@@ -14,7 +14,7 @@ static int tabNum = 0;
 
 void printTab() {
     for (unsigned int i = 0; i < tabNum; i++) {
-        std::cout << '-';
+        std::cout << '\t';
     }
 }
 
@@ -32,13 +32,15 @@ void SyntacticAnalysis::ASTNodeTrunk::print(const std::function<std::string(int)
     tabNum++;
     std::cout << "type: " << queryStr(type);
     if(!value.empty()){
-        std::cout<<"    value: "<<value;
+        std::cout<<"  value: "<<value;
     }
-    std::cout<< std::endl;
+    std::cout<< "  children: ["<<std::endl;
     for (const auto &node: children) {
         node->print(queryStr);
     }
     tabNum--;
+    printTab();
+    std::cout<< "]"<<std::endl;
 }
 
 void SyntacticAnalysis::ASTNodeLeaf::print(const std::function<std::string(int)> &queryStr) {
