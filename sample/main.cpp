@@ -6,6 +6,7 @@
 #include "lexical.h"
 #include "syntactic.h"
 #include "transform.h"
+#include "generation.h"
 
 int parseArgs(int argc, char *argv[], std::string &path) {
     if (argc == 1) {
@@ -38,6 +39,8 @@ int loadFile(const std::string &path, std::string &content) {
     return 0;
 }
 
+
+
 int main(int argc, char *argv[]) {
     std::string inputFile;
     if (parseArgs(argc, argv, inputFile)) {
@@ -65,6 +68,12 @@ int main(int argc, char *argv[]) {
     {
         Transform transform;
         newTree = transform.compile(tree);
+    }
+
+    std::string outputContent;
+    {
+        Generation generation;
+        outputContent = generation.compile(newTree);
     }
 
     return 0;

@@ -42,10 +42,10 @@ ASTNodeTrunk *Transform::travel(const std::shared_ptr<ASTNodeTrunk> &oldNode) {
 
     for (const auto &node: oldNode->children) {
         if (node->isLeaf) {
-            std::shared_ptr<ASTNodeLeaf> nodeLeaf = static_pointer_cast<ASTNodeLeaf>(node);
+            std::shared_ptr<ASTNodeLeaf> nodeLeaf = dynamic_pointer_cast<ASTNodeLeaf>(node);
             newNode->children.emplace_back(travel(nodeLeaf));
         } else {
-            std::shared_ptr<ASTNodeTrunk> nodeTrunk = static_pointer_cast<ASTNodeTrunk>(node);
+            std::shared_ptr<ASTNodeTrunk> nodeTrunk = dynamic_pointer_cast<ASTNodeTrunk>(node);
             newNode->children.emplace_back(travel(nodeTrunk));
         }
     }
